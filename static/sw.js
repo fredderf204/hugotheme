@@ -1,6 +1,7 @@
-self.addEventListener('install', function(e) {
+self.addEventListener('install', e => {
+  const timeStamp = Date.now();
   e.waitUntil(
-    caches.open('the-magic-cache').then(function(cache) {
+    caches.open('mfblog').then(cache => {
       return cache.addAll([
         '/',
         '/2017/01/02/starting-a-blog/',
@@ -86,9 +87,14 @@ self.addEventListener('install', function(e) {
         '/tags/kubernetes/index.xml',
         '/tags/terraform/',
         '/tags/terraform/index.xml',
-      ]);
+      ])
+        .then(() => self.skipWaiting());
     })
   );
+});
+
+self.addEventListener('activate', event => {
+  event.waitUntil(self.clients.claim());
 });
 
 self.addEventListener('fetch', event => {
