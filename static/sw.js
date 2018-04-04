@@ -1,7 +1,6 @@
-self.addEventListener('install', e => {
-  const timeStamp = Date.now();
+self.addEventListener('install', function (e) {
   e.waitUntil(
-    caches.open('mfblog').then(cache => {
+    caches.open('airhorner').then(function (cache) {
       return cache.addAll([
         '/',
         '/2017/01/02/starting-a-blog/',
@@ -87,19 +86,15 @@ self.addEventListener('install', e => {
         '/tags/kubernetes/index.xml',
         '/tags/terraform/',
         '/tags/terraform/index.xml',
-      ])
-        .then(() => self.skipWaiting());
+      ]);
     })
   );
 });
 
-self.addEventListener('activate', event => {
-  event.waitUntil(self.clients.claim());
-});
-
-self.addEventListener('fetch', event => {
+self.addEventListener('fetch', function (event) {
+  console.log(event.request.url);
   event.respondWith(
-    caches.match(event.request, {ignoreSearch: true}).then(response => {
+    caches.match(event.request).then(function (response) {
       return response || fetch(event.request);
     })
   );
