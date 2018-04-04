@@ -1,16 +1,18 @@
 self.addEventListener('install', function(e) {
   e.waitUntil(
-    caches.open('mfblog').then(function(cache) {
+    caches.open('the-magic-cache').then(function(cache) {
       return cache.addAll([
         '/',
-        '/2017/01/02/starting-a-blog/index.html',
-        '/2017/01/11/jenkins-on-azure-app-service/index.html',
-        '/2017/01/21/hugo-in-azure-blob-storage/index.html',
-        '/2017/02/09/microsoft-ignite-next-week/index.html',
+        '/sw.js',
+        '/index.html',
+        '/2017/01/02/starting-a-blog/',
+        '/2017/01/11/jenkins-on-azure-app-service/',
+        '/2017/01/21/hugo-in-azure-blob-storage/',
+        '/2017/02/09/microsoft-ignite-next-week/',
         '/2017/02/13/live-demo/index.html',
-        '/2017/05/01/getting-started-with-terraform-on-azure/index.html',
-        '/2017/05/30/taking-helm-for-a-spin/index.html',
-        '/2018/02/27/start-using-jenkins-with-azure-in-5-minutes/index.html',
+        '/2017/05/01/getting-started-with-terraform-on-azure/',
+        '/2017/05/30/taking-helm-for-a-spin/',
+        '/2018/02/27/start-using-jenkins-with-azure-in-5-minutes/',
         '/404.html',
         '/apple-touch-icon.png',
         '/categories/index.html',
@@ -68,44 +70,44 @@ self.addEventListener('install', function(e) {
         '/index.html',
         '/index.xml',
         '/js/script.js',
-        '/page/1/index.html',
+        '/page/aboutme/',
         '/page/index.html',
-        '/page/aboutme/index.html',
-        '/page/index.html',
-        '/post/index.html',
+        '/post/',
         '/post/index.xml',
-        '/post/page/1/index.html',
         '/sitemap.xml',
-        '/tags/app-service/index.html',
+        '/tags/app-service/',
         '/tags/app-service/index.xml',
-        '/tags/app-service/page/1/index.html',
-        '/tags/azure/index.html',
+        '/tags/azure/',
         '/tags/azure/index.xml',
-        '/tags/azure/page/1/index.html',
-        '/tags/blob/index.html',
+        '/tags/blob/',
         '/tags/blob/index.xml',
-        '/tags/blob/page/1/index.html',
-        '/tags/helm/index.html',
+        '/tags/helm/',
         '/tags/helm/index.xml',
-        '/tags/helm/page/1/index.html',
-        '/tags/hugo/index.html',
+        '/tags/hugo/',
         '/tags/hugo/index.xml',
-        '/tags/hugo/page/1/index.html',
-        '/tags/ignite/index.html',
+        '/tags/ignite/',
         '/tags/ignite/index.xml',
-        '/tags/ignite/page/1/index.html',
         '/tags/index.html',
         '/tags/index.xml',
-        '/tags/jenkins/index.html',
+        '/tags/jenkins/',
         '/tags/jenkins/index.xml',
-        '/tags/jenkins/page/1/index.html',
-        '/tags/kubernetes/index.html',
+        '/tags/kubernetes/',
         '/tags/kubernetes/index.xml',
-        '/tags/kubernetes/page/1/index.html',
-        '/tags/terraform/index.html',
+        '/tags/terraform/',
         '/tags/terraform/index.xml',
-        '/terraform/page/1/index.html'
       ]);
+    })
+  );
+});
+
+self.addEventListener('activate', event => {
+  event.waitUntil(self.clients.claim());
+});
+
+self.addEventListener('fetch', event => {
+  event.respondWith(
+    caches.match(event.request, {ignoreSearch: true}).then(response => {
+      return response || fetch(event.request);
     })
   );
 });
