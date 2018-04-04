@@ -1,6 +1,6 @@
 self.addEventListener('install', function (e) {
   e.waitUntil(
-    caches.open('airhorner').then(function (cache) {
+    caches.open('mfblog').then(function (cache) {
       return cache.addAll([
         '/',
         '/2017/01/02/starting-a-blog/',
