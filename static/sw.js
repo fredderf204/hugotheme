@@ -3,8 +3,6 @@ self.addEventListener('install', function(e) {
     caches.open('the-magic-cache').then(function(cache) {
       return cache.addAll([
         '/',
-        '/sw.js',
-        '/index.html',
         '/2017/01/02/starting-a-blog/',
         '/2017/01/11/jenkins-on-azure-app-service/',
         '/2017/01/21/hugo-in-azure-blob-storage/',
@@ -15,7 +13,6 @@ self.addEventListener('install', function(e) {
         '/2018/02/27/start-using-jenkins-with-azure-in-5-minutes/',
         '/404.html',
         '/apple-touch-icon.png',
-        '/categories/index.html',
         '/categories/index.xml',
         '/css/font-awesome.min.css',
         '/css/images/avatar.png',
