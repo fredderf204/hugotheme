@@ -2,7 +2,7 @@
     "name": "MF Azure Blog",
     "short_name": "MF Azure Blog",
     "display": "standalone",
-    "start_url": "/blog/index.html",
+    "start_url": ".",
     "theme_color": "#A2BCDE",
     "background_color": "#ffffff",
     "icons": [{
